@@ -1,0 +1,21 @@
+name: update_ntdr
+
+on:
+  schedule:
+    - cron: '0 0 * * *' #runs daily at midnight UTC
+  workflow_dispatch:
+
+
+jobs:
+  update_crashes:
+    runs-on: ubuntu-latest
+    env:
+      PINS_S3_KEY: ${{ secrets.PINS_S3_KEY }}
+      PINS_S3_PASSWORD: ${{ secrets.PINS_S3_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: r-lib/actions/setup-r@v2
+      - name: Install required packages
+        run: Rscript -e 'install.packages(c("pins", "ntdr"), dependencies = TRUE)'
+      - name: Run R script to update ntdr data
+        run: Rscript update_ntdr.R
