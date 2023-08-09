@@ -26,3 +26,5 @@ pin_write(board = ntdr_board, x = vrh_adjusted)
 pin_write(board = ntdr_board, x = vrh_raw)
 pin_write(board = ntdr_board, x = voms_adjusted)
 pin_write(board = ntdr_board, x = voms_raw)
+
+write_board_manifest()
